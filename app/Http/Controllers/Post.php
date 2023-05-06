@@ -19,7 +19,7 @@ class Post extends Controller
                 $result['data'] = $userModel->comments($id);
 
             }else{
-                $result['data'] = $userModel->find($id);
+                $result['data'] = $userModel->search($id);
             }
         }else{
             $result = $this->resultNotFound("Post Tidak Ditemukan");

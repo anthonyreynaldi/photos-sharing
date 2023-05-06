@@ -18,7 +18,7 @@ class PostModel extends Model
 
     protected $fillable = ['id_user', 'caption'];
 
-    public function find($id = null)
+    public function search($id = null)
     {
         if($id){
             $result = $this->select(['posts.id', 'posts.id_user', 'posts.caption'])->where('id', $id)->first();

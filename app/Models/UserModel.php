@@ -23,21 +23,33 @@ class UserModel extends Model
         if($id){
             $result = $this->select(['id', 'name', 'email'])->where('id', $id)->first();
 
-            if($result){
-                $posts = $this->select(['posts.id'])->join('posts', 'users.id', '=', 'posts.id_user')->where('users.id', $id)->get()->toArray();
-    
-                foreach($posts as $i => $post){
-                    $posts[$i] = $post['id'];
-                }
-
-                $result->posts = $posts;
-            }
-
         }else{
             $result = $this->all(['id', 'name', 'email']);
         }
 
         return $result;
+    }
+
+    public function searchUserPhotos($id)
+    {
+        $photos = $this->select(['photos.id'])->join('photos', 'users.id', '=', 'photos.id_user')->where('users.id', $id)->get();
+    
+        foreach($photos as $i => $photo){
+            $photos[$i] = $photo['id'];
+        }
+
+        return $photos;
+    }
+    
+    public function searchUserPosts($id)
+    {
+        $posts = $this->select(['posts.id'])->join('posts', 'users.id', '=', 'posts.id_user')->where('users.id', $id)->get();
+    
+        foreach($posts as $i => $post){
+            $posts[$i] = $post['id'];
+        }
+
+        return $posts;
     }
 
     public function add($name, $email, $password){

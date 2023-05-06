@@ -23,6 +23,8 @@ Route::get('/', function () {
 
 Route::controller(User::class)->prefix("users")->group(function(){
     Route::get('{id?}', 'show');
+    Route::get('{id}/photos', 'showPhotos');
+    Route::get('{id}/posts', 'showPosts');
     Route::post('/', 'insert');
     Route::put('{id}', 'update');
     Route::delete('{id}', 'delete');

@@ -23,6 +23,36 @@ class User extends Controller
 
         return response()->json($result, $result['statusCode']);
     }
+
+    public function showPhotos($id)
+    {
+        $result = $this->resultOk("Berhasil Mendapatkan Photos User");
+
+        $userModel = new UserModel();
+
+        if($id == null || $this->isExsist($userModel, $id)){
+            $result['data'] = $userModel->searchUserPhotos($id);
+        }else{
+            $result = $this->resultNotFound("User Tidak Ditemukan");
+        }
+
+        return response()->json($result, $result['statusCode']);
+    }
+    
+    public function showPosts($id)
+    {
+        $result = $this->resultOk("Berhasil Mendapatkan Posts User");
+
+        $userModel = new UserModel();
+
+        if($id == null || $this->isExsist($userModel, $id)){
+            $result['data'] = $userModel->searchUserPosts($id);
+        }else{
+            $result = $this->resultNotFound("User Tidak Ditemukan");
+        }
+
+        return response()->json($result, $result['statusCode']);
+    }
     
     public function insert(Request $request)
     {
